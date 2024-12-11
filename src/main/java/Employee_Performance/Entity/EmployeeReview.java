@@ -20,7 +20,7 @@ import org.hibernate.annotations.CurrentTimestamp;
 public class EmployeeReview {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto Increment of id
     private Long id;
     private Long employeeId;
 

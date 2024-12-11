@@ -20,6 +20,7 @@ public class EmployeeReviewServiceImpl implements EmployeeReviewService {
     @Autowired
     private ModelMapper modelMapper;
 
+    // Hardcoded weight of the manager - If needed we can change
     private static final double weight = 0.6;
 
     @Override
@@ -31,19 +32,22 @@ public class EmployeeReviewServiceImpl implements EmployeeReviewService {
 
     }
 
+    //Implementing performance summary method
     @Override
     public EmployeeReview getPerformanceSummary(Long employeeId) {
         EmployeeReview review = employeeReviewRepo.findByEmployeeId(employeeId)
                 .orElseThrow(()-> new EmployeeNotFound("Employee with "+employeeId+" Not Found"));
 
+        // Calculating self review length
         double selfReviewLengthScore = (review.getSelfReview().length())/ 100.0;
-        System.out.println(selfReviewLengthScore);
-        System.out.println(review.getSelfReview().length());
+        System.out.println(selfReviewLengthScore); // Printing it to verify
+        System.out.println(review.getSelfReview().length()); // Printing it to verify
 
+        // Calculating derived performance score
         double derivedPerformanceScore = (selfReviewLengthScore +(review.getManagerRating()*weight))/2.0;
         System.out.println(derivedPerformanceScore);
 
-
+        // Saving derived performance score to DB
         review.setDerivedPerformanceScore(derivedPerformanceScore);
         EmployeeReview employeeReview1 = employeeReviewRepo.save(review);
 

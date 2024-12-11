@@ -12,6 +12,7 @@ public class EmployeePerformanceApplication {
 		SpringApplication.run(EmployeePerformanceApplication.class, args);
 	}
 
+	// Model mapper - To convert Dto to Entity and vice-versa
 	@Bean
 	public ModelMapper modelMapper(){
 		return new ModelMapper();

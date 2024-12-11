@@ -15,11 +15,13 @@ public class EmployeeReviewController {
     @Autowired
     private EmployeeReviewService employeeReviewService;
 
+    // REST API for saving employee to DB
     @PostMapping("/save")
     public ResponseEntity<EmployeeReview> save(@RequestBody EmployeeReview employeeReview) {
         return new ResponseEntity<>(employeeReviewService.saveEmployeeReview(employeeReview),HttpStatus.CREATED);
     }
 
+    // REST API for getting employee performance using employeeId
     @GetMapping("/{employeeId}")
     public ResponseEntity<EmployeeReview> getPerformanceSummary(@PathVariable long employeeId) {
         return new ResponseEntity<>(employeeReviewService.getPerformanceSummary(employeeId), HttpStatus.OK);
